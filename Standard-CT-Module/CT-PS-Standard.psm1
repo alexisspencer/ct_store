@@ -119,13 +119,11 @@ function Initialize-Script {
 Function Write-Transcript {
     [CmdletBinding()]
     Param(
-        [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True, Mandatory = $true)]
+        [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         $output,
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         [switch] $NoNewLine
     )
-    #Get-Variable VerboseOut -Scope Global -ValueOnly # | Format-List
-    #Get-ChildItem $VerboseOut -
     if (Get-Variable VerboseOut -Scope Global -ValueOnly) {
         if ($NoNewLine) {
             Write-Host "$($output)" -NoNewline
@@ -144,11 +142,8 @@ Function Write-API-Log {
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True, Mandatory = $true)]
         $output,
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
-        [switch] $NoNewLine,
-        [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
-        [switch] $VerboseOut #= (Get-ChildItem $Verbose)
+        [switch] $NoNewLine
     )
-    #Get-ChildItem $Verbose
     if (Get-Variable VerboseOut -Scope Global -ValueOnly) {
         if ($NoNewLine) {
             Write-Host "$($output)" -NoNewline
