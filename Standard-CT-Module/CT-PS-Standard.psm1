@@ -13,9 +13,9 @@ function Initialize-Script {
     
     This needs to be imported to a script by using this command:
 
-    New-Module -Name "Standard CT PowerShell Template" -ScriptBlock ([Scriptblock]::Create((New-Object System.Net.WebClient).DownloadString("Your Module URL Here")))
+    New-Module -Name "Standard CT PowerShell Template" -ScriptBlock ([Scriptblock]::Create((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/alexisspencer/ct_store/main/Standard-CT-Module/CT-PS-Standard.psm1")))
 
-    Then triggered by the command "Initialize-Script"
+    Then trigger the function "Initialize-Script" at the start of your script
     
     #>
 
