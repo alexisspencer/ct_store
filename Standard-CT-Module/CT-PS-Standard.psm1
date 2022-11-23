@@ -139,7 +139,7 @@ Function Write-Transcript {
 Function Write-API-Log {
     [CmdletBinding()]
     Param(
-        [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True, Mandatory = $true)]
+        [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         $output,
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         [switch] $NoNewLine
