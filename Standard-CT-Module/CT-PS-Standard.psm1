@@ -120,7 +120,7 @@ Function Write-Transcript {
     [CmdletBinding()]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True, Mandatory = $true)]
-        [string[]] $output,
+        $output,
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         [switch] $NoNewLine
     )
@@ -142,7 +142,7 @@ Function Write-API-Log {
     [CmdletBinding()]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True, Mandatory = $true)]
-        [string[]] $output,
+        $output,
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         [switch] $NoNewLine,
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
