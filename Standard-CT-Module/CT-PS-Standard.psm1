@@ -130,7 +130,7 @@ Function Write-Transcript {
 
 
 # Writes to the API log and optionally console if -Verbose flag is set at script level
-Function Write-API-Log {
+Function Write-APILog {
     [CmdletBinding()]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
