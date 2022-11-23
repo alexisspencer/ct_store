@@ -31,7 +31,6 @@ function Initialize-Script {
     #Transcript-Log "-------$('-' * $MyInvocation.MyCommand.Name.Length)----------"
     Write-Host "**********************"
     Write-Host "Script $($ScriptName) starting."
-    Write-Host "**********************"
 
     #Transcript-Log "-------$('-' * $MyInvocation.MyCommand.Name.Length)----------"
 
@@ -122,7 +121,7 @@ Function Write-Transcript {
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         $output
     )
-    if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
+    if ($PSCmdlet.MyInvocation.BoundParameters['Verbose'] -eq $true) {
         Write-Verbose "$($output)"
     }
     $output | Out-File -FilePath "$($Transcript_log)" -Append
@@ -136,7 +135,7 @@ Function Write-APILog {
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         $output
     )
-    if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
+    if ($PSCmdlet.MyInvocation.BoundParameters['Verbose'] -eq $true) {
         Write-Verbose "$($output)"
     }
     $output | Out-File -FilePath "$($API_log)" -Append
