@@ -120,16 +120,10 @@ Function Write-Transcript {
     [CmdletBinding()]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
-        $output,
-        [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
-        [switch] $NoNewLine
+        $output
     )
-    if (Get-Variable VerboseOut -Scope Global -ValueOnly) {
-        if ($NoNewLine) {
-            Write-Host "$($output)" -NoNewline
-        } else {
-            Write-Host "$($output)"
-        }
+    if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
+        Write-Verbose "$($output)"
     }
     $output | Out-File -FilePath "$($Transcript_log)" -Append
 }
@@ -140,16 +134,10 @@ Function Write-API-Log {
     [CmdletBinding()]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
-        $output,
-        [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
-        [switch] $NoNewLine
+        $output
     )
-    if (Get-Variable VerboseOut -Scope Global -ValueOnly) {
-        if ($NoNewLine) {
-            Write-Host "$($output)" -NoNewline
-        } else {
-            Write-Host "$($output)"
-        }
+    if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
+        Write-Verbose "$($output)"
     }
     $output | Out-File -FilePath "$($API_log)" -Append
 }
