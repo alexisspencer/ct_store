@@ -124,7 +124,7 @@ function Initialize-Script {
     Write-Log "WSManStackVersion: $($PSVersionTable.WSManStackVersion)"
     Write-Log "PSRemotingProtocolVersion: $($PSVersionTable.PSRemotingProtocolVersion)"
     Write-Log "SerializationVersion: $($PSVersionTable.SerializationVersion)"
-    . "**********************"
+    Write-Log "**********************"
 
 
     <#
