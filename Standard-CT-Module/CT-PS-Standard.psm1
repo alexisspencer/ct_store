@@ -25,12 +25,15 @@ function Initialize-Script {
     It starts transcript to the transcript log file so the history can be accessed anytime in the future
     The script then tests for the CT_DEST folder and creates it if its not there.
     
-    This needs to be imported to a script by using the following two commands:
+    This needs to be imported to a script by using the following set of commands:
 
-    Invoke-WebRequest -uri "https://raw.githubusercontent.com/alexisspencer/ct_store/main/Standard-CT-Module/CT-PS-Standard.psm1" -OutFile "$($PSScriptRoot)\CT-PS-Standard.psm1" -Verbose:$VerbosePreference -Debug:$DebugPreference
+    --------
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    if(Test-Path -Path "$($PSScriptRoot)\CT-PS-Standard.psm1" -PathType Leaf ) { Remove-Item "$($PSScriptRoot)\CT-PS-Standard.psm1" -Force }
+    Invoke-WebRequest -uri "https://raw.githubusercontent.com/alexisspencer/ct_store/main/Standard-CT-Module/CT-PS-Standard.psm1" -OutFile "$($PSScriptRoot)\CT-PS-Standard.psm1" -UseBasicParsing -Verbose:$VerbosePreference -Debug:$DebugPreference #-SkipCertificateCheck
     Import-Module -Name "$($PSScriptRoot)\CT-PS-Standard.psm1" -Force -Verbose:$VerbosePreference -Debug:$DebugPreference
-
-    Then trigger the function "Initialize-Script" at the start of your script
+    Initialize-Script
+    --------
     
     #>
 
