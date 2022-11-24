@@ -233,6 +233,6 @@ function Get-CurrentLineNumber {
     # Downloads a file using BITS if possible, and if BITS is not available, downloads directly from URL
     [CmdletBinding()]
     param()
-    return "$(Get-ChildItem $MyInvocation.ScriptLineNumber)"
+    return "$($PSCmdlet.MyInvocation.ScriptLineNumber)"
 }
 
