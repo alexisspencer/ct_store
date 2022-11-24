@@ -93,22 +93,22 @@ function Initialize-Script {
     }
 
     # Create Transcript header
-    Write-Transcript "**********************"
-    write-transcript "Script: $($PSCmdlet.MyInvocation.ScriptName)."
-    Write-Transcript "Start time: $($DateStamp)"
-    Write-Transcript "Username: $($env:USERDOMAIN)\$($env:USERNAME)"
-    Write-Transcript "Execution Policy Preference: $($env:PSExecutionPolicyPreference)"
-    Write-Transcript "Machine: $($env:COMPUTERNAME) ($($env:OS))"
-    Write-Transcript "Process ID: $($PID))"
-    Write-Transcript "PSVersion: $($PSVersionTable.PSVersion)"
-    Write-Transcript "PSEdition: $($PSVersionTable.PSEdition)"
-    Write-Transcript "PSCompatibleVersions: $($PSVersionTable.PSCompatibleVersions)"
-    Write-Transcript "BuildVersion: $($PSVersionTable.BuildVersion)"
-    Write-Transcript "CLRVersion: $($PSVersionTable.CLRVersion)"
-    Write-Transcript "WSManStackVersion: $($PSVersionTable.WSManStackVersion)"
-    Write-Transcript "PSRemotingProtocolVersion: $($PSVersionTable.PSRemotingProtocolVersion)"
-    Write-Transcript "SerializationVersion: $($PSVersionTable.SerializationVersion)"
-    Write-Transcript "**********************"
+    Write-Log "**********************"
+    Write-Log "Script: $($PSCmdlet.MyInvocation.ScriptName)."
+    Write-Log "Start time: $($DateStamp)"
+    Write-Log "Username: $($env:USERDOMAIN)\$($env:USERNAME)"
+    Write-Log "Execution Policy Preference: $($env:PSExecutionPolicyPreference)"
+    Write-Log "Machine: $($env:COMPUTERNAME) ($($env:OS))"
+    Write-Log "Process ID: $($PID))"
+    Write-Log "PSVersion: $($PSVersionTable.PSVersion)"
+    Write-Log "PSEdition: $($PSVersionTable.PSEdition)"
+    Write-Log "PSCompatibleVersions: $($PSVersionTable.PSCompatibleVersions)"
+    Write-Log "BuildVersion: $($PSVersionTable.BuildVersion)"
+    Write-Log "CLRVersion: $($PSVersionTable.CLRVersion)"
+    Write-Log "WSManStackVersion: $($PSVersionTable.WSManStackVersion)"
+    Write-Log "PSRemotingProtocolVersion: $($PSVersionTable.PSRemotingProtocolVersion)"
+    Write-Log "SerializationVersion: $($PSVersionTable.SerializationVersion)"
+    . "**********************"
 
 
     <#
@@ -117,7 +117,7 @@ function Initialize-Script {
 
 }
 
-Function Write-Transcript {
+Function Write-Log {
     [CmdletBinding()]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
@@ -163,7 +163,7 @@ Function Request-Download {
             Remove-Item $FILE_LOCAL -Force
         } catch {
             #Can't remove the MSI, therefore cannot continue
-            write-host "Cannot remove $FILE_LOCAL. Unable to continue. $($Error[0].Exception.Message)"
+            Write-Log "Cannot remove $FILE_LOCAL. Unable to continue. $($Error[0].Exception.Message)"
             return $Error
         }
     }
@@ -186,20 +186,20 @@ Function Request-Download {
         if ($BCStatus.ClientConfiguration.CurrentClientMode -ne "DistributedCache") {
             try {
                 Enable-BCDistributed -Verbose -Force
-                Write-Output "BranchCache Distributed Mode is now enabled"
+                Write-Log "BranchCache Distributed Mode is now enabled" -Verbose:$VerbosePreference
             } catch {
                 #BranchCache cannot be enabled to work with BITS. BITS will download over the internet connection instead of cached copies on the local subnet
-                Write-Output "Cannot enable BranchCache Distributed Mode. $($Error[0].ErrorDetails).  The installation files will download over the internet connection instead of cached copies on the local subnet"
+                Write-Log "Cannot enable BranchCache Distributed Mode. $($Error[0].ErrorDetails).  The installation files will download over the internet connection instead of cached copies on the local subnet" -Verbose:$VerbosePreference
             }
         } else {
-            Write-Output "BranchCache Distributed Mode is already enabled in distributed mode on this computer"
+            Write-Log "BranchCache Distributed Mode is already enabled in distributed mode on this computer" -Verbose:$VerbosePreference
         }
         $DownloadJob = Start-BitsTransfer -Priority Normal -DisplayName "$($DateStamp) $($FILE_LOCAL)" -Source $FILE_URL -Destination $FILE_LOCAL
     } else {
         try {
             $DownloadJob = Invoke-WebRequest -Uri $FILE_URL -OutFile $FILE_LOCAL -SkipCertificateCheck -PassThru
         } catch {
-            write-host "Cannot download $($FILE_URL). $_"
+            Write-Log "Cannot download $($FILE_URL). $_" -Verbose:$VerbosePreference
             return $_
         }
     }
