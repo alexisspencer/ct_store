@@ -14,7 +14,7 @@ trap {
 }
 
 function Initialize-Script {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param()
     <# 
     ---- STANDARD SCRIPT BLOCK ----
@@ -140,7 +140,7 @@ function Initialize-Script {
 }
 
 Function Write-Log {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True)]
         $output
@@ -168,7 +168,7 @@ Function Write-APILog {
 
 Function Request-Download {
     # Downloads a file using BITS if possible, and if BITS is not available, downloads directly from URL
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     Param(
         [Parameter(ValueFromPipeline=$True, ValueFromPipelineByPropertyName=$True, Mandatory = $true)]
         [string[]] $FILE_URL,
@@ -230,6 +230,9 @@ Function Request-Download {
 
 
 function Get-CurrentLineNumber {
+    # Downloads a file using BITS if possible, and if BITS is not available, downloads directly from URL
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
     return "$(Get-ChildItem $MyInvocation.ScriptLineNumber)"
 }
 
