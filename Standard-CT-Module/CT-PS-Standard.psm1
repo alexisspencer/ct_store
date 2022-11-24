@@ -31,8 +31,8 @@ function Initialize-Script {
 
 
     #Transcript-Log "-------$('-' * $MyInvocation.MyCommand.Name.Length)----------"
-    Write-Host "**********************"
-    Write-Host "Script $($ScriptName) starting."
+    Write-Log "**********************" -verbose:$VerbosePreference
+    Write-Log "Script $($ScriptName) starting." -verbose:$VerbosePreference
 
     #Transcript-Log "-------$('-' * $MyInvocation.MyCommand.Name.Length)----------"
 
@@ -43,8 +43,8 @@ function Initialize-Script {
             #Transcript-Log "New folder created at $CT_DEST."
         }catch{
             #Can't create the folder, therefore cannot continue
-            Write-Host "Cannot create folder $CT_DEST. $($Error[0].Exception.Message)"
-            Write-Host $_
+            Write-Error "Cannot create folder $CT_DEST. $($Error[0].Exception.Message)"
+            Write-Error $_ -verbose:$VerbosePreference
             #Stop-Transcript
             exit 1
         }
@@ -56,8 +56,8 @@ function Initialize-Script {
             #Transcript-Log "New logs folder created at $CT_DEST."
         }catch{
             #Can't create the folder, therefore cannot continue
-            Write-Host "Cannot create logs folder in $CT_DEST. $($Error[0].Exception.Message)"
-            Write-Host $_
+            Write-Error "Cannot create logs folder in $CT_DEST. $($Error[0].Exception.Message)"
+            Write-Error $_ -verbose:$VerbosePreference
             #Stop-Transcript
             exit 3
         }
@@ -69,8 +69,8 @@ function Initialize-Script {
             #Transcript-Log "New logs folder for $($ScriptName) created at $CT_DEST."
         }catch{
             #Can't create the folder, therefore cannot continue
-            Write-Host "Cannot create logs folder for $($ScriptName) in $CT_DEST. $($Error[0].Exception.Message)"
-            Write-Host $_
+            Write-Error "Cannot create logs folder for $($ScriptName) in $CT_DEST. $($Error[0].Exception.Message)"
+            Write-Error $_
             #Stop-Transcript
             exit 4
         }
@@ -84,9 +84,9 @@ function Initialize-Script {
             Set-ItemProperty -Path "HKLM:\Software\CT" -Name "CustomerNo" -Value $customer
         }catch{
             #Can't create the regkey, therefore cannot continue
-            Write-Host "Cannot create registry key at $($CT_Reg_Key). $($Error[0].Exception.Message)"
-            Write-Host "$($CTMonitoringReg)"
-            Write-Host $_
+            Write-Error "Cannot create registry key at $($CT_Reg_Key). $($Error[0].Exception.Message)"
+            Write-Error "$($CTMonitoringReg)"
+            Write-Error $_
             #Stop-Transcript
             exit 5
         }
