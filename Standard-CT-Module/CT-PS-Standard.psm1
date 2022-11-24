@@ -1,4 +1,15 @@
 
+trap {
+    write-host "Terminating error $_"
+    Write-Host "Script $((Get-ChildItem $MyInvocation.PSCommandPath | Select-Object -Expand Name)) ended with exit code $($exiterror)."
+    write-host "Transcript stored at $($Transcript_log)."
+    Write-Host "Console output log stored at $($Output_log)"
+    Write-Host "API log stored at $($API_log)"
+    Write-Host "**********************"
+    Write-Host ""
+    exit $exiterror
+}
+
 function Initialize-Script {
     [CmdletBinding()]
     param()
@@ -31,6 +42,7 @@ function Initialize-Script {
 
 
     #Transcript-Log "-------$('-' * $MyInvocation.MyCommand.Name.Length)----------"
+    Start-Transcript -Path $Transcript_log -Append -verbose:$VerbosePreference
     Write-Log "**********************" -verbose:$VerbosePreference
     Write-Log "Script $($ScriptName) starting." -verbose:$VerbosePreference
 
