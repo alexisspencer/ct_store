@@ -1,7 +1,7 @@
 
 trap {
     write-host "Terminating error $_"
-    Write-Host "Script $((Get-ChildItem $MyInvocation.PSCommandPath | Select-Object -Expand Name)) ended with exit code $($exiterror)."
+    Write-Host "Script $((Get-ChildItem $MyInvocation.PSCommandPath | Select-Object -Expand Name)) ended at line $(Get-CurrentLineNumber) with exit code $($exiterror)."
     Write-Host "Output log            : $($Output_log)"
     Write-Host "Transcript log        : $($Transcript_log)"
     Write-Host "API log               : $($API_log)"
