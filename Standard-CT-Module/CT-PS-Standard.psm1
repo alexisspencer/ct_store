@@ -11,9 +11,10 @@ function Initialize-Script {
     It starts transcript to the transcript log file so the history can be accessed anytime in the future
     The script then tests for the CT_DEST folder and creates it if its not there.
     
-    This needs to be imported to a script by using this command:
+    This needs to be imported to a script by using the following two commands:
 
-    New-Module -Name "Standard CT PowerShell Template" -ScriptBlock ([Scriptblock]::Create((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/alexisspencer/ct_store/main/Standard-CT-Module/CT-PS-Standard.psm1")))
+    Invoke-WebRequest -uri "https://raw.githubusercontent.com/alexisspencer/ct_store/main/Standard-CT-Module/CT-PS-Standard.psm1" -OutFile "$($PSScriptRoot)\CT-PS-Standard.psm1" -Verbose:$VerbosePreference #-SkipCertificateCheck
+    Import-Module -Name "$($PSScriptRoot)\CT-PS-Standard.psm1" -Force -Verbose:$VerbosePreference
 
     Then trigger the function "Initialize-Script" at the start of your script
     
