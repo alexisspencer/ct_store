@@ -143,7 +143,7 @@ Function Write-Log {
         $output
     )
     if ($PSCmdlet.MyInvocation.BoundParameters['Verbose'] -eq $true) {
-        Write-Verbose "$(Get-CurrentLineNumber): $($output)"
+        Write-Verbose "($(Get-CurrentLineNumber)) $($output)"
     }
     $output | Out-File -FilePath "$($Output_log)" -Append
 }
@@ -157,7 +157,7 @@ Function Write-APILog {
         $output
     )
     if ($PSCmdlet.MyInvocation.BoundParameters['Verbose'] -eq $true) {
-        Write-Verbose "$(Get-CurrentLineNumber): $($output)"
+        Write-Verbose "($(Get-CurrentLineNumber)) $($output)"
     }
     $output | Out-File -FilePath "$($API_log)" -Append
 }
