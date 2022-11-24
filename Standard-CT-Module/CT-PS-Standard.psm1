@@ -13,8 +13,8 @@ function Initialize-Script {
     
     This needs to be imported to a script by using the following two commands:
 
-    Invoke-WebRequest -uri "https://raw.githubusercontent.com/alexisspencer/ct_store/main/Standard-CT-Module/CT-PS-Standard.psm1" -OutFile "$($PSScriptRoot)\CT-PS-Standard.psm1" -Verbose:$VerbosePreference #-SkipCertificateCheck
-    Import-Module -Name "$($PSScriptRoot)\CT-PS-Standard.psm1" -Force -Verbose:$VerbosePreference
+    Invoke-WebRequest -uri "https://raw.githubusercontent.com/alexisspencer/ct_store/main/Standard-CT-Module/CT-PS-Standard.psm1" -OutFile "$($PSScriptRoot)\CT-PS-Standard.psm1" -Verbose:$VerbosePreference -Debug:$DebugPreference
+    Import-Module -Name "$($PSScriptRoot)\CT-PS-Standard.psm1" -Force -Verbose:$VerbosePreference -Debug:$DebugPreference
 
     Then trigger the function "Initialize-Script" at the start of your script
     
