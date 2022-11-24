@@ -43,8 +43,12 @@ function Initialize-Script {
 
     #Transcript-Log "-------$('-' * $MyInvocation.MyCommand.Name.Length)----------"
     Start-Transcript -Path $Transcript_log -Append -verbose:$VerbosePreference
-    Write-Log "**********************" -verbose:$VerbosePreference
-    Write-Log "Script $($ScriptName) starting." -verbose:$VerbosePreference
+    Write-Host "**********************"
+    Write-Host "Output log: $($Output_log)"
+    Write-Host "Transcript log: $($Transcript_log)"
+    Write-Host "API log: $($API_log)"
+    Write-Host "Install log (if used): $($Install_log)"
+    Write-Host "Script $($ScriptName) starting."
 
     #Transcript-Log "-------$('-' * $MyInvocation.MyCommand.Name.Length)----------"
 
