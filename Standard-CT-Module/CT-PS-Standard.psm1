@@ -23,6 +23,7 @@ function Initialize-Script {
     $global:CT_DEST="C:\CT"  # Where the files are downloaded to
     $global:DateStamp = get-date -Format yyyyMMddTHHmmss # A formatted date strong
     $global:ScriptName = (Get-ChildItem $MyInvocation.PSCommandPath | Select-Object -Expand Name).Substring(0,(Get-ChildItem $MyInvocation.PSCommandPath | Select-Object -Expand Name).Length-4)
+    $global:Output_log = "$CT_DEST\logs\$($ScriptName)\$($DateStamp)_output.log"  # The output
     $global:Transcript_log = "$CT_DEST\logs\$($ScriptName)\$($DateStamp)_transcript.log"  # The powershell transcript file
     $global:API_log = "$($CT_DEST)\logs\$($ScriptName)\$($DateStamp)_API.log"
     $global:Install_log = "$CT_DEST\logs\$($ScriptName)\$($DateStamp)_install.log"  # The powershell installation file
@@ -124,7 +125,7 @@ Function Write-Transcript {
     if ($PSCmdlet.MyInvocation.BoundParameters['Verbose'] -eq $true) {
         Write-Verbose "$($output)"
     }
-    $output | Out-File -FilePath "$($Transcript_log)" -Append
+    $output | Out-File -FilePath "$($Output_log)" -Append
 }
 
 
