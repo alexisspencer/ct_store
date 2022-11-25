@@ -1,5 +1,6 @@
 
 
+
 trap {
     write-host "Terminating error $_"
     Write-Host "Script $((Get-ChildItem $MyInvocation.PSCommandPath | Select-Object -Expand Name)) ended at line $(Get-CurrentLineNumber) with exit code $($exiterror)."
