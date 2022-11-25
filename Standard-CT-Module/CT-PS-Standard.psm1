@@ -1,4 +1,5 @@
 
+
 trap {
     write-host "Terminating error $_"
     Write-Host "Script $((Get-ChildItem $MyInvocation.PSCommandPath | Select-Object -Expand Name)) ended at line $(Get-CurrentLineNumber) with exit code $($exiterror)."
@@ -8,8 +9,6 @@ trap {
     Write-Host "Install log (if used) : $($Install_log)"
     Write-Host "**********************"
     Write-Host ""
-    Remove-Module "$(Get-ChildItem $PSScriptRoot)\CT-PS-Standard.psm1" -Force
-    Remove-Item "$(Get-ChildItem $PSScriptRoot)\CT-PS-Standard.psm1" -Force
     exit $exiterror
 }
 
